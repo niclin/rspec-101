@@ -10,7 +10,7 @@ RSpec.describe CoursesController, type: :controller do
 
       get:index
 
-      expect(assigns[:courses].to eq([course1, course2]))
+      expect(assigns[:courses]).to eq([course1, course2])
       expect(response).to render_template("index")
     end
   end
