@@ -1,0 +1,9 @@
+<div class="col-md-12">
+  <% form_for @group do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_aera :description %>
+  <div class="form-actions">
+    <%= f.submit "Submit", :disable_with => 'Submiting...', :class => "btn btn-primay"%>
+  </div>
+  <% end %>
+</div>
