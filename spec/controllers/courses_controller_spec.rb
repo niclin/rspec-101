@@ -5,8 +5,8 @@ RSpec.describe CoursesController, type: :controller do
 
   describe "GET index" do
     it "assigns @courses and render template" do
-      course1 = Course.create(title: "foo", description: "bar")
-      course2 = Course.create(title: "bar", description: "foo")
+      course1 = FactoryGirl.create(:course)
+      course2 = FactoryGirl.create(:course)
 
       get:index
 
