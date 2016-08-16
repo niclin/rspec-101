@@ -48,5 +48,19 @@ RSpec.describe CoursesController, type: :controller do
     end
   end
 
+  describe "POST create" do
+    it "create a new course record" do
+      course = FactoryGirl.build(:course)
+      expect{ post :create, :course => FactoryGirl.attributes_for(:course)}.to change{ Course.count }.by(1)
+    end
+
+    it "" do
+      course = FactoryGirl.build(:course)
+      post :create, :course => FactoryGirl.attributes_for(:course)
+      expect(response).to redirect_to courses_path
+    end
+
+  end
+
 
 end
