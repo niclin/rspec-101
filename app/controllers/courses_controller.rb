@@ -15,10 +15,14 @@ class CoursesController < ApplicationController
     @course = Course.new(course_params)
     if @course.save
 
-    redirect_to courses_path
-  else
-    render :new
+      redirect_to courses_path
+    else
+      render :new
+    end
   end
+
+  def edit
+    @course = Course.find(params[:id])
   end
 
 

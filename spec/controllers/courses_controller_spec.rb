@@ -76,5 +76,19 @@ RSpec.describe CoursesController, type: :controller do
 
   end
 
+  describe "GET edit" do
+    it "assign course" do
+      course = FactoryGirl.create(:course)
+      get :edit, :id => course.id
+      expect(assigns[:course]).to eq(course)
+    end
+
+    it "render template" do
+      course = FactoryGirl.create(:course)
+      get :edit, :id => course.id
+      expect(response).to render_template("edit")
+    end
+  end
+
 
 end
