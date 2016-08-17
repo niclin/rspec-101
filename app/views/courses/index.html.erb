@@ -1,7 +1,7 @@
 <div class="col-md-12">
 
   <div class="course">
-    <%= link_to ("New course", new_course_path, :class => "btn pull-right") %>
+    <%= link_to("New course", new_course_path, :class => "btn pull-right" ) %>
   </div>
 
   <table class="table">
@@ -17,10 +17,10 @@
       <% @courses.each do |course| %>
       <tr>
         <td> #</td>
-        <td> <%= link_to(course.title, course_path(course) %></td>
+        <td> <%= link_to(course.title, course_path(course)) %></td>
         <td> <%= course.description %></td>
         <td> <%= link_to("Edit", edit_course_path(course), :class => "btn btn-xs")%>
-<%= link_to ("Delete", course_path(course), :class => "btn btn-xs", :method => :delete, :data => { :confirm = "Are you sure?"} ) %>
+<%= link_to("Delete", course_path(course), :class => "btn btn-xs", :method => :delete, :data => { :confirm => "Are you sure?" }) %>
         </td>
       </tr>
       <% end %>

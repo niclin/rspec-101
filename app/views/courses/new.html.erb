@@ -1,7 +1,7 @@
 <div class="col-md-12">
-  <% form_for @group do |f| %>
+  <%= form_for @course do |f| %>
   <%= f.text_field :title %>
-  <%= f.text_aera :description %>
+  <%= f.text_area :description %>
   <div class="form-actions">
     <%= f.submit "Submit", :disable_with => 'Submiting...', :class => "btn btn-primay"%>
   </div>
