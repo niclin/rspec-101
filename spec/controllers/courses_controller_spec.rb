@@ -41,7 +41,7 @@ RSpec.describe CoursesController, type: :controller do
     context "when user login" do
 
       before do
-        sign_in user
+        sign_in_user
         get :new
       end
 
@@ -53,6 +53,13 @@ RSpec.describe CoursesController, type: :controller do
       it "render templete" do
         expect(response).to render_template("new")
       end
+    end
+
+
+    it_behaves_like "require_sign_in" do
+      let (:action) {
+        get :new
+      }
     end
   end
 
@@ -67,7 +74,7 @@ RSpec.describe CoursesController, type: :controller do
     let(:user) { FactoryGirl.create(:user) }
 
     context "when course dosen't have a title" do
-      before { sign_in user }
+      before { sign_in_user }
 
 
       it "dosen't create a record" do
@@ -82,7 +89,7 @@ RSpec.describe CoursesController, type: :controller do
 
     context "when course have a title" do
 
-      before { sign_in user }
+      before { sign_in_user }
       it "create a new course record" do
         course = FactoryGirl.build(:course)
         expect{ post :create, :course => FactoryGirl.attributes_for(:course)}.to change{ Course.count }.by(1)
@@ -93,6 +100,13 @@ RSpec.describe CoursesController, type: :controller do
         post :create, :course => FactoryGirl.attributes_for(:course)
         expect(response).to redirect_to courses_path
       end
+    end
+
+    it_behaves_like "require_sign_in" do
+      let (:action) {
+        course = FactoryGirl.build(:course)
+        post :create, course: FactoryGirl.attributes_for(:course)
+      }
     end
 
   end
