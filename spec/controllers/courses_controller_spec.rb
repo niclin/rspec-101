@@ -64,8 +64,12 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe "POST create" do
+    let(:user) { FactoryGirl.create(:user) }
 
     context "when course dosen't have a title" do
+      before { sign_in user }
+
+
       it "dosen't create a record" do
         expect{ post :create, course: {:description => "bar"} }.to change{ Course.count}.by(0)
       end
@@ -77,6 +81,8 @@ RSpec.describe CoursesController, type: :controller do
     end
 
     context "when course have a title" do
+
+      before { sign_in user }
       it "create a new course record" do
         course = FactoryGirl.build(:course)
         expect{ post :create, :course => FactoryGirl.attributes_for(:course)}.to change{ Course.count }.by(1)
