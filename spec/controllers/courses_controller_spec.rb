@@ -117,7 +117,7 @@ RSpec.describe CoursesController, type: :controller do
       it "doesn't update a record" do
         course = FactoryGirl.create(:course)
         put :update, id: course.id, course: { title: "", description: "Description" }
-        expect(course.description).not_to eq("Description")
+        expect(course.title).not_to eq("")
       end
 
       it "render edit template" do
