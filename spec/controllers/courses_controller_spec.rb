@@ -127,6 +127,31 @@ RSpec.describe CoursesController, type: :controller do
       end
     end
 
+    describe "DELETE dstroy" do
+      it "assigns @course" do
+        course = FactoryGirl.create(:course)
+        delete :destroy, id: course.id
+        expect(assigns[:course]).to eq(course)
+      end
+
+      it "delete a record" do
+        course = FactoryGirl.create(:course)
+        expect { delete :destroy, id: course.id }.to change{ Course.count }.by(-1)
+      end
+
+      it "redirect to courses_path" do
+        course = FactoryGirl.create(:course)
+        delete :destroy, id: course.id
+        expect(response).to redirect_to courses_path
+      end
+    end
+
+    describe "Homepage" do
+      it "route root path to course #index" do
+        expect(get: "/").to route_to(controller: "courses", action: "index")
+      end
+    end
+
   end
 
 
