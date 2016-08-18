@@ -1,20 +1,18 @@
-Comment Edit
-
-require_relative "../base"
+require_relative "../../base"
 
 module PageObjects
   module Application
-    class Navbar < base
+    class Navbar < Base
       def sign_in
         click_on "Login"
-        PageObjects::Devise::Sessions::New.New
+        PageObjects::Devise::Sessions::New.new
       end
 
       def sign_out(email)
         user_dropdown(email).click_on "Logout"
       end
 
-      def user_deopdown(email)
+      def user_dropdown(email)
         dropdown email
       end
 
