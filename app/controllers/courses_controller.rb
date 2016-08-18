@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
 
-  before_action :authenticate_user!, :only => [:new, :create, :edit, :update]
+  before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
     @courses = Course.all
@@ -39,7 +39,7 @@ class CoursesController < ApplicationController
   end
 
   def destroy
-    @course = Course.find(params[:id])
+    @course = current_user.courses.find(params[:id])
     @course.destroy
 
     redirect_to courses_path

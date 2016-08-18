@@ -200,21 +200,36 @@ RSpec.describe CoursesController, type: :controller do
 
 
   describe "DELETE dstroy" do
+
+    let(:user) { FactoryGirl.create(:user) }
+    let!(:course_with_owner) { FactoryGirl.create(:course, user: user) }
+    let(:course_without_owner) { FactoryGirl.create(:course) }
+    before { sign_in_user }
+
     it "assigns @course" do
-      course = FactoryGirl.create(:course)
-      delete :destroy, id: course.id
-      expect(assigns[:course]).to eq(course)
+      delete :destroy, id: course_with_owner.id
+      expect(assigns[:course]).to eq(course_with_owner)
     end
 
     it "delete a record" do
-      course = FactoryGirl.create(:course)
-      expect { delete :destroy, id: course.id }.to change{ Course.count }.by(-1)
+      expect { delete :destroy, id: course_with_owner.id }.to change{ Course.count }.by(-1)
     end
 
     it "redirect to courses_path" do
-      course = FactoryGirl.create(:course)
-      delete :destroy, id: course.id
+      delete :destroy, id: course_with_owner.id
       expect(response).to redirect_to courses_path
+    end
+
+    it_behaves_like "require_course_owner" do
+      let (:action) {
+        delete :destroy, id: course_without_owner.id
+      }
+    end
+
+    it_behaves_like "require_sign_in" do
+      let (:action) {
+        delete :destroy, id: course_without_owner.id
+      }
     end
   end
 
