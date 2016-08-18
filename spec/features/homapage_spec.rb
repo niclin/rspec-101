@@ -13,4 +13,13 @@ describe "homepage", :type => feature do
     PageObjects::Pages::Home.new
   end
 
+  def new_session_page
+    home_page.go
+    navbar.sign_in
+  end
+
+  def navbar
+    PageObjects::Application::Navbar.new
+  end
+
 end
